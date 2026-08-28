@@ -1,6 +1,7 @@
 package br.sp.etec.sebrae.app_conversor
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -8,6 +9,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -16,6 +18,7 @@ import br.sp.etec.sebrae.app_conversor.model.FinanceResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +45,8 @@ class MainActivity : AppCompatActivity() {
         spMoeda.adapter = moedasAdapter
         carregarCotacoes()
 
+        val tempo = findViewById<TextView>(R.id.textTempo)
+        tempo.text = saudacao()
         val btnConverte = findViewById<Button>(R.id.btnConverte)
         btnConverte.setOnClickListener {
             val valor = findViewById<EditText>(R.id.txtValor).text.toString().toDouble()
@@ -78,5 +83,16 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+    }
+    fun saudacao(): String{
+        val hora = LocalTime.now().hour
+        val mensagem = when {
+            hora < 12 -> "Bom dia!"
+            hora < 18 -> "Boa tarde!"
+            else ->{
+                "Boa noite!"
+            }
+        }
+        return mensagem
     }
 }
