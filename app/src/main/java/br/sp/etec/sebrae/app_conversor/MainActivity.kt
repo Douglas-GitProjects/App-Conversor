@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val btnConverte = findViewById<Button>(R.id.BtnConverte)
+        val btnConverte = findViewById<Button>(R.id.btnConverte)
         btnConverte.setOnClickListener {
             ClientApi.api.getCotacoes().enqueue(object : Callback<FinanceResponse> {
                 override fun onResponse(
